@@ -13,11 +13,13 @@ django-rest-auth = "*"
 django-storages = "*"
 djangorestframework = "*"
 djangorestframework-jwt = "*"
+drfpasswordless = "*"
 "psycopg2" = "*"
 zappa = "*"
-drfpasswordless = "*"
+whitenoise = "*"
 
 [dev-packages]
+ipdb = "*"
 
 [requires]
 python_version = "3.6"

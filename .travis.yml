@@ -1,15 +1,13 @@
 language: python
 
-python: 3.6
+python:
+  - "3.6"
 
-env:
-  - TOX_ENV=py36
+matrix:
+  fast_finish: true
 
-script:
-  - tox -e $TOX_ENV
-
-install:
-  - pip install tox
+install: pip install -U tox-travis
+script: tox
 
 notifications:
   email:

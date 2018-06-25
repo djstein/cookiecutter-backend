@@ -1,0 +1,15 @@
+language: python
+
+python:
+  - "3.6"
+
+matrix:
+  fast_finish: true
+
+install: pip install -U tox-travis
+script: tox
+
+notifications:
+  email:
+    on_success: change
+    on_failure: always
