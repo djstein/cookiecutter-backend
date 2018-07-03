@@ -15,5 +15,6 @@
     "Not open source"
   ],
   "timezone": "UTC",
-  "postgresql_version": ["10.4", "10.3", "10.2", "10.1", "9.6"]
+  "postgresql_version": ["10.4", "10.3", "10.2", "10.1", "9.6"],
+  "aws_region": "us-east-1"
 }
