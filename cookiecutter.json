@@ -5,6 +5,7 @@
   "description": "Django Zappa on AWS Lambda",
   "author_name": "Dylan Stein",
   "domain_name": "example.com",
+  "github_user": "djstein",
   "email": "{{ cookiecutter.author_name.lower()|replace(' ', '-') }}@ncsu.edu",
   "version": "0.1.0",
   "open_source_license": [
@@ -16,5 +17,13 @@
   ],
   "timezone": "UTC",
   "postgresql_version": ["10.4", "10.3", "10.2", "10.1", "9.6"],
-  "aws_region": "us-east-1"
+  "aws_region": "us-east-1",
+  "use_celery": "y",
+  "_copy_without_render": [
+    "*.hbs",
+    "docs/*.md",
+    "internals/*",
+    "node_modules/",
+    "project/templates/*"
+  ]
 }
