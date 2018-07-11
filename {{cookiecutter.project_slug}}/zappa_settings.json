@@ -1,10 +1,24 @@
 {
-  "dev": {
+  "staging": {
+    "aws_region": "{{cookiecutter.aws_region}}",
+    "django_settings": "config.settings.staging",
+    "profile_name": "default",
+    "project_name": "{{cookiecutter.project_slug}}",
+    "runtime": "python3.6",
+    "s3_bucket": "{{cookiecutter.project_slug}}",
+    "aws_environment_variables": {
+      "DJANGO_SETTINGS_MODULE": "config.settings.staging"
+    }
+  },
+  "production": {
     "aws_region": "{{cookiecutter.aws_region}}",
     "django_settings": "config.settings.production",
     "profile_name": "default",
     "project_name": "{{cookiecutter.project_slug}}",
     "runtime": "python3.6",
-    "s3_bucket": "{{cookiecutter.project_slug}}"
+    "s3_bucket": "{{cookiecutter.project_slug}}",
+    "aws_environment_variables": {
+      "DJANGO_SETTINGS_MODULE": "config.settings.production"
+    }
   }
 }
