@@ -10,7 +10,10 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/1.10/ref/settings/
 """
 import environ
-import datetime
+import json
+import boto3
+
+secrets = boto3.client("secretsmanager")
 
 ROOT_DIR = environ.Path(__file__) - 3  # (project/config/settings/common.py - 3 = project/)
 APPS_DIR = ROOT_DIR.path('project')
@@ -102,17 +105,25 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'config.wsgi.application'
 
-
 # Database
 # https://docs.djangoproject.com/en/1.10/ref/settings/#databases
+rds = json.dumps(secrets.get_secrets_value("prod/{{cookiecutter.project_slug}}/Database")['SecretString'])
+
+DATABASE_ENGINE = rds.get('engine') if rds else env.str('POSTGRES_NAME', 'postgres')
+DATABASE_NAME = rds.get('engine') if rds else env.str('POSTGRES_NAME', 'postgres')
+DATABASE_HOST = rds.get('host') if rds else env.str('POSTGRES_HOST', 'postgres')
+DATABASE_PASSWORD = rds.get('password') if rds else env.str('POSTGRES_PASSWORD', '')
+DATABASE_PORT = rds.get('port') if rds else env.int('POSTGRES_PORT', '5432')
+DATABASE_USER = rds.get('username') if rds else env.str('POSTGRES_USER', 'postgres')
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': env.str('POSTGRES_NAME', 'postgres'),
-        'USER': env.str('POSTGRES_USER', 'postgres'),
-        # 'HOST': env.str('POSTGRES_HOST', 'postgres'),
-        'PORT': env.int('POSTGRES_PORT', '5432'),
+        'ENGINE': DATABASE_ENGINE,
+        'NAME': DATABASE_NAME,
+        'USER': DATABASE_USER,
+        'PASSWORD': DATABASE_PASSWORD,
+        'HOST': DATABASE_HOST,
+        'PORT': DATABASE_PORT
     }
 }
 
@@ -198,12 +209,12 @@ ACCOUNT_UNIQUE_EMAIL = True
 OLD_PASSWORD_FIELD_ENABLED = True
 
 # Email Settings
-DEFAULT_FROM_EMAIL = 'djstein@ncsu.edu'
-ACCOUNT_EMAIL_SUBJECT_PREFIX = '[Modern Project] '
+DEFAULT_FROM_EMAIL = '{{cookiecutter.email}}'
+ACCOUNT_EMAIL_SUBJECT_PREFIX = '[{{cookiecutter.project_name}}] '
 ACCOUNT_EMAIL_VERIFICATION = 'optional'
 # TURN ON WHEN SSL SET UP ACCOUNT_DEFAULT_HTTP_PROTOCOL = True
 
-AWS_STORAGE_BUCKET_NAME = '{{cookiecutter.project_slug}}-zappa-static'
+AWS_STORAGE_BUCKET_NAME = '{{cookiecutter.project_slug}}-static'
 
 AWS_S3_CUSTOM_DOMAIN = '%s.s3.amazonaws.com' % AWS_STORAGE_BUCKET_NAME
 
@@ -212,6 +223,6 @@ STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 AWS_AUTO_CREATE_BUCKET = True
 
 PASSWORDLESS_AUTH = {
-    'PASSWORDLESS_EMAIL_NOREPLY_ADDRESS': 'djstein@ncsu.edu',
+    'PASSWORDLESS_EMAIL_NOREPLY_ADDRESS': '{{cookiecutter.email}}',
     'PASSWORDLESS_AUTH_TYPES': ['EMAIL'],
 }

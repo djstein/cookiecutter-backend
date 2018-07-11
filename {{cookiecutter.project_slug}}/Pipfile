@@ -4,7 +4,8 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-coreapi-cli= "*"
+boto3 = "*"
+coreapi-cli = "*"
 Django = "*"
 django-allauth = "*"
 django-cors-headers = "*"
