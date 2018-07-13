@@ -26,12 +26,12 @@ deploy:
   #   skip_cleanup: true
   #   local_dir: zappa_output
   #   acl: public_read
-  #   region: {{cookiecutter.region}}
+  #   region: {{cookiecutter.aws_region}}
 
   # - provider: s3
   #   bucket: "{{cookiecutter.s3_bucket_backend}}-static"
   #   skip_cleanup: true
   #   local_dir: static
   #   acl: public_read
-  #   region: {{cookiecutter.region}}
+  #   region: {{cookiecutter.aws_region}}
 

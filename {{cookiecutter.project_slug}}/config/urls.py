@@ -4,11 +4,9 @@ from rest_framework.documentation import include_docs_urls
 from rest_framework_jwt.views import verify_jwt_token
 from config.routers import DefaultRouter
 
-from project.posts.urls import router as posts_router
 from project.users.urls import router as users_router
 
 router = DefaultRouter()
-router.extend(posts_router)
 router.extend(users_router)
 
 urlpatterns = [

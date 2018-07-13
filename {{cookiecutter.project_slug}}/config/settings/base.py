@@ -57,7 +57,6 @@ THIRD_PARTY_APPS = (
 
 LOCAL_APPS = (
     'project.users',
-    'project.posts',
     'project.api_registration'
 )
 
@@ -109,12 +108,19 @@ WSGI_APPLICATION = 'config.wsgi.application'
 # https://docs.djangoproject.com/en/1.10/ref/settings/#databases
 rds = json.dumps(secrets.get_secrets_value("prod/{{cookiecutter.project_slug}}/Database")['SecretString'])
 
-DATABASE_ENGINE = rds.get('engine') if rds else env.str('POSTGRES_NAME', 'postgres')
+DATABASE_ENGINE = 'django.db.backends.postgresql_psycopg2'
 DATABASE_NAME = rds.get('engine') if rds else env.str('POSTGRES_NAME', 'postgres')
 DATABASE_HOST = rds.get('host') if rds else env.str('POSTGRES_HOST', 'postgres')
 DATABASE_PASSWORD = rds.get('password') if rds else env.str('POSTGRES_PASSWORD', '')
 DATABASE_PORT = rds.get('port') if rds else env.int('POSTGRES_PORT', '5432')
 DATABASE_USER = rds.get('username') if rds else env.str('POSTGRES_USER', 'postgres')
+
+# DATABASE_NAME = 'PincerDatabase'
+# DATABASE_HOST = 'pm1uipw2idtu9yp.ccj2uoxlwo6b.us-east-1.rds.amazonaws.com'
+# DATABASE_PASSWORD = 'pincerdatabase'
+# DATABASE_PORT = '5432'
+# DATABASE_USER = 'pincer'
+
 
 DATABASES = {
     'default': {
