@@ -15,7 +15,7 @@ notifications:
     on_failure: always
 
 script:
-  - yarn build-storybook
+  - zappa deploy production
 
 deploy:
   provider: s3
