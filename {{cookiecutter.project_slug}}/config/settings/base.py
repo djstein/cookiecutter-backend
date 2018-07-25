@@ -114,11 +114,12 @@ WSGI_APPLICATION = 'config.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/1.10/ref/settings/#databases
-rds = json.dumps(client.get_secret_value("prod/{{cookiecutter.project_slug}}/Database")['SecretString'])
+# rds = json.dumps(client.get_secret_value("prod/{{cookiecutter.project_slug}}/Database")['SecretString'])
 
+rds = None
 DATABASE_ENGINE = 'django.db.backends.postgresql_psycopg2'
 DATABASE_NAME = rds.get('engine') if rds else env.str('POSTGRES_NAME', 'postgres')
-DATABASE_HOST = rds.get('host') if rds else env.str('POSTGRES_HOST', 'postgres')
+DATABASE_HOST = rds.get('host') if rds else env.str('POSTGRES_HOST', 'localhost')
 DATABASE_PASSWORD = rds.get('password') if rds else env.str('POSTGRES_PASSWORD', '')
 DATABASE_PORT = rds.get('port') if rds else env.int('POSTGRES_PORT', '5432')
 DATABASE_USER = rds.get('username') if rds else env.str('POSTGRES_USER', 'postgres')
@@ -227,14 +228,6 @@ DEFAULT_FROM_EMAIL = '{{cookiecutter.email}}'
 ACCOUNT_EMAIL_SUBJECT_PREFIX = '[{{cookiecutter.project_name}}] '
 ACCOUNT_EMAIL_VERIFICATION = 'optional'
 # TURN ON WHEN SSL SET UP ACCOUNT_DEFAULT_HTTP_PROTOCOL = True
-
-AWS_STORAGE_BUCKET_NAME = '{{cookiecutter.project_slug}}-static'
-
-AWS_S3_CUSTOM_DOMAIN = '%s.s3.amazonaws.com' % AWS_STORAGE_BUCKET_NAME
-
-DEFAULT_FILE_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
-STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
-AWS_AUTO_CREATE_BUCKET = True
 
 PASSWORDLESS_AUTH = {
     'PASSWORDLESS_EMAIL_NOREPLY_ADDRESS': '{{cookiecutter.email}}',

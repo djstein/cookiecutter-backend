@@ -4,7 +4,9 @@ get_secret_value_response = client.get_secret_value(SecretId='DJANGO_SECRET_KEY'
 
 DEBUG = True
 
-SECRET_KEY = get_secret_value_response.get('SecretString') if aws_env else env.str('DJANGO_SECRET_KEY')
+DJANGO_SECRET_KEY = get_secret_value_response.get('SecretString')
+
+SECRET_KEY = DJANGO_SECRET_KEY if DJANGO_SECRET_KEY else env.str('DJANGO_SECRET_KEY')
 
 STATIC_URL = '/static/'
 
