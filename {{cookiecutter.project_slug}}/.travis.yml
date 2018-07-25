@@ -6,32 +6,32 @@ python:
 matrix:
   fast_finish: true
 
-install: pip install -U tox-travis
-script: tox
+# install: pip install -U tox-travis
+# script:
 
-notifications:
-  email:
-    on_success: change
-    on_failure: always
+# notifications:
+#   email:
+#     on_success: change
+#     on_failure: always
 
 script:
-  - zappa deploy production
+  - pip install pipenv
+  - pipenv install
+  - pipenv run 'python manage.py collectstatic'
+  - pipenv run 'zappa package production -o zappa_output/zappa_output.zip'
 
 deploy:
-  provider: s3
+  - provider: s3
+    bucket: "{{cookiecutter.project_slug}}-backend"
+    skip_cleanup: true
+    local_dir: zappa_output
+    acl: public_read
+    region: {{cookiecutter.aws_region}}
 
-
-  # - provider: s3
-  #   bucket: "{{cookiecutter.s3_bucket_backend}}"
-  #   skip_cleanup: true
-  #   local_dir: zappa_output
-  #   acl: public_read
-  #   region: {{cookiecutter.aws_region}}
-
-  # - provider: s3
-  #   bucket: "{{cookiecutter.s3_bucket_backend}}-static"
-  #   skip_cleanup: true
-  #   local_dir: static
-  #   acl: public_read
-  #   region: {{cookiecutter.aws_region}}
+  - provider: s3
+    bucket: "{{cookiecutter.project_slug}}-static"
+    skip_cleanup: true
+    local_dir: static
+    acl: public_read
+    region: {{cookiecutter.aws_region}}
 

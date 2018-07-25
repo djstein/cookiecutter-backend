@@ -1,10 +1,10 @@
 from .base import *
 
-aws_env = json.dumps(secrets.get_secrets_value("prod/{{cookiecutter.project_slug}}/Database")['SecretString'])
+get_secret_value_response = client.get_secret_value(SecretId='DJANGO_SECRET_KEY')
 
 DEBUG = True
 
-SECRET_KEY = aws_env.get('DJANGO_SECRET_KEY') if aws_env else env.str('DJANGO_SECRET_KEY')
+SECRET_KEY = get_secret_value_response.get('SecretString') if aws_env else env.str('DJANGO_SECRET_KEY')
 
 STATIC_URL = '/static/'
 

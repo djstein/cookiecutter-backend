@@ -1,7 +1,7 @@
-# cookiecutter-django-zappa
+# cookiecutter-backend
 
 Cookiecutter Django deployed to AWS Lambda with Zappa
 
 ```bash
-cookiecutter https://github.com/djstein/cookiecutter-django-zappa.git
+cookiecutter https://github.com/djstein/cookiecutter-backend.git
 ```

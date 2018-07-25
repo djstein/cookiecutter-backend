@@ -13,7 +13,15 @@ import environ
 import json
 import boto3
 
-secrets = boto3.client("secretsmanager")
+endpoint_url = "https://secretsmanager.us-east-1.amazonaws.com"
+region_name = "us-east-1"
+
+session = boto3.session.Session()
+client = session.client(
+    "secretsmanager",
+    region_name=region_name,
+    endpoint_url=endpoint_url
+)
 
 ROOT_DIR = environ.Path(__file__) - 3  # (project/config/settings/common.py - 3 = project/)
 APPS_DIR = ROOT_DIR.path('project')
@@ -106,7 +114,7 @@ WSGI_APPLICATION = 'config.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/1.10/ref/settings/#databases
-rds = json.dumps(secrets.get_secrets_value("prod/{{cookiecutter.project_slug}}/Database")['SecretString'])
+rds = json.dumps(client.get_secret_value("prod/{{cookiecutter.project_slug}}/Database")['SecretString'])
 
 DATABASE_ENGINE = 'django.db.backends.postgresql_psycopg2'
 DATABASE_NAME = rds.get('engine') if rds else env.str('POSTGRES_NAME', 'postgres')
