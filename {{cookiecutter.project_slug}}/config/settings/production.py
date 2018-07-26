@@ -7,18 +7,21 @@ DJANGO_SECRET_KEY = get_secret_value_response.get('SecretString')
 SECRET_KEY = DJANGO_SECRET_KEY if DJANGO_SECRET_KEY else env.str('DJANGO_SECRET_KEY')
 
 # ALLOWED_HOSTS = env.list('DJANGO_ALLOWED_HOSTS')
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['127.0.0.1', 'x6kb437rh.execute-api.us-east-1.amazonaws.com', ]
 
 # Static Storage Settings
 AWS_STORAGE_BUCKET_NAME = '{{cookiecutter.project_slug}}-static'
-
-AWS_S3_CUSTOM_DOMAIN = '%s.s3.amazonaws.com' % AWS_STORAGE_BUCKET_NAME
-
+AWS_S3_CUSTOM_DOMAIN = f's3.amazonaws.com/{AWS_STORAGE_BUCKET_NAME}'
 STATIC_URL = "https://%s/" % AWS_S3_CUSTOM_DOMAIN
 
-DEFAULT_FILE_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
-STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 AWS_AUTO_CREATE_BUCKET = True
+
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+# STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+MIDDLEWARE = ['whitenoise.middleware.WhiteNoiseMiddleware'] + MIDDLEWARE  # noqa F405
+
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
+MEDIA_URL = f'https://s3.amazonaws.com/{AWS_STORAGE_BUCKET_NAME}/'
 
 # # Database
 # # https://docs.djangoproject.com/en/1.10/ref/settings/#databases

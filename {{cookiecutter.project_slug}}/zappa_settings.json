@@ -8,6 +8,13 @@
     "s3_bucket": "{{cookiecutter.project_slug}}-staging",
     "aws_environment_variables": {
       "DJANGO_SETTINGS_MODULE": "config.settings.staging"
+    },
+    "vpc_config": {
+      "SubnetIds": [
+        "{{cookiecutter.subnet_1_id}}",
+        "{{cookiecutter.subnet_2_id}}"
+      ],
+      "SecurityGroupIds": ["{{cookiecutter.security_group_id}}"]
     }
   },
   "production": {
@@ -19,6 +26,13 @@
     "s3_bucket": "{{cookiecutter.project_slug}}",
     "aws_environment_variables": {
       "DJANGO_SETTINGS_MODULE": "config.settings.production"
+    },
+    "vpc_config": {
+      "SubnetIds": [
+        "{{cookiecutter.subnet_1_id}}",
+        "{{cookiecutter.subnet_2_id}}"
+      ],
+      "SecurityGroupIds": ["{{cookiecutter.security_group_id}}"]
     }
   }
 }
