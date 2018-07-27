@@ -31,27 +31,3 @@ MEDIA_URL = f'https://s3.amazonaws.com/{AWS_STORAGE_BUCKET_NAME}/'
 # DATABASE_PASSWORD = rds.get('password') if rds else env.str('POSTGRES_PASSWORD', '')
 # DATABASE_PORT = rds.get('port') if rds else env.int('POSTGRES_PORT', '5432')
 # DATABASE_USER = rds.get('username') if rds else env.str('POSTGRES_USER', 'postgres')
-{ % if cookiecutter.use_rds == 'y' % }
-# rds_password_key_response = client.get_secret_value(SecretId='{{cookiecutter.rds_secret_key}}')
-
-# RDS_DB_PASSWORD = rds_password_key_response.get('SecretString')
-
-# DATABASE_ENGINE = 'django.db.backends.postgresql_psycopg2'
-# DATABASE_NAME = '{{cookiecutter.db_name}}'
-# DATABASE_HOST = '{{cookiecutter.db_host}}'
-# DATABASE_PASSWORD = RDS_DB_PASSWORD
-# DATABASE_PORT = '{{cookiecutter.db_port}}'
-# DATABASE_USER = '{{cookiecutter.db_user}}'
-
-
-# DATABASES = {
-#     'default': {
-#         'ENGINE': DATABASE_ENGINE,
-#         'NAME': DATABASE_NAME,
-#         'USER': DATABASE_USER,
-#         'PASSWORD': DATABASE_PASSWORD,
-#         'HOST': DATABASE_HOST,
-#         'PORT': DATABASE_PORT
-#     }
-# }
-{ % endif % }
