@@ -26,5 +26,6 @@
     "internals/*",
     "node_modules/",
     "project/templates/*"
-  ]
+  ],
+  "use_vpc": "n"
 }
