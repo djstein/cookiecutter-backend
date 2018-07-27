@@ -32,7 +32,6 @@
     "vpc_config": {
       "SubnetIds": ["{{cookiecutter.subnet_1}}", "{{cookiecutter.subnet_2}}"],
       "SecurityGroupIds": ["{{cookiecutter.security_group_id}}"]
-    }
-    {% endif %}
+    }{% endif %}
   }
 }

@@ -7,7 +7,7 @@ DJANGO_SECRET_KEY = django_secret_key_response.get('SecretString')
 SECRET_KEY = DJANGO_SECRET_KEY if DJANGO_SECRET_KEY else env.str('DJANGO_SECRET_KEY')
 
 # ALLOWED_HOSTS = env.list('DJANGO_ALLOWED_HOSTS')
-ALLOWED_HOSTS = ['127.0.0.1', 'x6kb437rh.execute-api.us-east-1.amazonaws.com', ]
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost', '.execute-api.us-east-1.amazonaws.com', ]
 
 # Static Storage Settings
 AWS_STORAGE_BUCKET_NAME = '{{cookiecutter.project_slug}}-static'
