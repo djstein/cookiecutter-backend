@@ -1,8 +1,8 @@
 from .base import *
 
-get_secret_value_response = client.get_secret_value(SecretId='DJANGO_SECRET_KEY')
+django_secret_key_response = client.get_secret_value(SecretId='DJANGO_SECRET_KEY')
 
-DJANGO_SECRET_KEY = get_secret_value_response.get('SecretString')
+DJANGO_SECRET_KEY = django_secret_key_response.get('SecretString')
 
 SECRET_KEY = DJANGO_SECRET_KEY if DJANGO_SECRET_KEY else env.str('DJANGO_SECRET_KEY')
 
@@ -24,22 +24,24 @@ DEFAULT_FILE_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
 MEDIA_URL = f'https://s3.amazonaws.com/{AWS_STORAGE_BUCKET_NAME}/'
 
 # # Database
-# # https://docs.djangoproject.com/en/1.10/ref/settings/#databases
-# # rds = json.dumps(client.get_secret_value("prod/pincer-backend/Database")['SecretString'])
 
-# rds = None
-# DATABASE_ENGINE = 'django.db.backends.postgresql_psycopg2'
+
 # DATABASE_NAME = rds.get('engine') if rds else env.str('POSTGRES_NAME', 'postgres')
 # DATABASE_HOST = rds.get('host') if rds else env.str('POSTGRES_HOST', 'localhost')
 # DATABASE_PASSWORD = rds.get('password') if rds else env.str('POSTGRES_PASSWORD', '')
 # DATABASE_PORT = rds.get('port') if rds else env.int('POSTGRES_PORT', '5432')
 # DATABASE_USER = rds.get('username') if rds else env.str('POSTGRES_USER', 'postgres')
 
-# # DATABASE_NAME = 'PincerDatabase'
-# # DATABASE_HOST = 'pm1uipw2idtu9yp.ccj2uoxlwo6b.us-east-1.rds.amazonaws.com'
-# # DATABASE_PASSWORD = 'pincerdatabase'
-# # DATABASE_PORT = '5432'
-# # DATABASE_USER = 'pincer'
+# rds_password_key_response = client.get_secret_value(SecretId='{{cookiecutter.rds_secret_key}}')
+
+# RDS_DB_PASSWORD = rds_password_key_response.get('SecretString')
+
+# DATABASE_ENGINE = 'django.db.backends.postgresql_psycopg2'
+# DATABASE_NAME = '{{cookiecutter.db_name}}'
+# DATABASE_HOST = '{{cookiecutter.db_host}}'
+# DATABASE_PASSWORD = RDS_DB_PASSWORD
+# DATABASE_PORT = '{{cookiecutter.db_port}}'
+# DATABASE_USER = '{{cookiecutter.db_user}}'
 
 
 # DATABASES = {
