@@ -28,5 +28,6 @@
     "project/templates/*"
   ],
   "use_rds": "n",
-  "use_vpc": "n"
+  "use_vpc": "n",
+  "stage": "production"
 }

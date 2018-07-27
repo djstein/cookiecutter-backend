@@ -16,7 +16,7 @@
     }
     {% endif %}
   },
-  "production": {
+  "{{cookiecutter.stage}}": {
     "aws_region": "{{cookiecutter.aws_region}}",
     "django_settings": "config.settings.production",
     "profile_name": "default",
