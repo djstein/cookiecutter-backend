@@ -27,5 +27,6 @@
     "node_modules/",
     "project/templates/*"
   ],
+  "use_rds": "n",
   "use_vpc": "n"
 }
