@@ -9,12 +9,11 @@
     "aws_environment_variables": {
       "DJANGO_SETTINGS_MODULE": "config.settings.staging"
     },
-    {% if cookiecutter.use_vpc == 'y' %}
+    {% if cookiecutter.use_rds == 'y' %}
     "vpc_config": {
       "SubnetIds": [ "{{cookiecutter.subnet_1}}", "{{cookiecutter.subnet_2}}"],
       "SecurityGroupIds": ["{{cookiecutter.security_group_id}}"]
-    }
-    {% endif %}
+    }{% endif %}
   },
   "{{cookiecutter.stage}}": {
     "aws_region": "{{cookiecutter.aws_region}}",
@@ -28,7 +27,7 @@
     },
     "manage_roles": false, // Disable Zappa client managing roles.
     "role_name": "{{cookiecutter.project_slug}}-production-ZappaExecutionRole", // Name of your Zappa execution role. Optional, default: <project_name>-<env>-ZappaExecutionRole.
-    {% if cookiecutter.use_vpc == 'y' %}
+    {% if cookiecutter.use_rds == 'y' %}
     "vpc_config": {
       "SubnetIds": ["{{cookiecutter.subnet_1}}", "{{cookiecutter.subnet_2}}"],
       "SecurityGroupIds": ["{{cookiecutter.security_group_id}}"]

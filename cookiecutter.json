@@ -27,8 +27,7 @@
     "node_modules/",
     "project/templates/*"
   ],
-  "use_rds": "n",
-  "use_vpc": "n",
+  "use_rds": "y",
   "stage": "production",
   "rds_secret_key": "",
   "db_name": "",
