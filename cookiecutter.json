@@ -29,5 +29,6 @@
   ],
   "use_rds": "n",
   "use_vpc": "n",
-  "stage": "production"
+  "stage": "production",
+  "rds_secret_key": ""
 }
