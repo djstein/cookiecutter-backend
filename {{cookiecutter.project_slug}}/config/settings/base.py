@@ -151,7 +151,8 @@ SITE_ID = 1
 # https://docs.djangoproject.com/en/dev/ref/settings/#static-root
 STATIC_ROOT = str(ROOT_DIR('static'))
 # https://docs.djangoproject.com/en/dev/ref/settings/#static-url
-STATIC_URL = '{{cookiecutter.stage}}/static/'
+STATIC_URL = '/{{cookiecutter.stage}}/static/'
+WHITENOISE_STATIC_PREFIX = '/static/'
 # https://docs.djangoproject.com/en/dev/ref/contrib/staticfiles/#std:setting-STATICFILES_DIRS
 STATICFILES_DIRS = [
     str(APPS_DIR.path('static')),
