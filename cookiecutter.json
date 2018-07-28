@@ -34,5 +34,8 @@
   "db_host": "",
   "db_port": "",
   "db_user": "",
-  "db_password": ""
+  "db_password": "",
+  "subnet_1": "",
+  "subnet_2": "",
+  "security_group_id": ""
 }
