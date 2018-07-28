@@ -20,8 +20,29 @@ MIDDLEWARE = ['whitenoise.middleware.WhiteNoiseMiddleware'] + MIDDLEWARE  # noqa
 DEFAULT_FILE_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
 MEDIA_URL = f'https://s3.amazonaws.com/{AWS_STORAGE_BUCKET_NAME}/'
 
-# # Database
+# Database
+# rds_password_key_response = client.get_secret_value(SecretId='{{cookiecutter.rds_secret_key}}')
+rds_password_key_response = None
+RDS_DB_PASSWORD = rds_password_key_response.get('SecretString') if rds_password_key_response else '{{cookiecutter.db_password}}'
 
+DATABASE_ENGINE = 'django.db.backends.postgresql_psycopg2'
+DATABASE_NAME = '{{cookiecutter.db_name}}'
+DATABASE_HOST = '{{cookiecutter.db_host}}'
+DATABASE_PASSWORD = RDS_DB_PASSWORD
+DATABASE_PORT = '{{cookiecutter.db_port}}'
+DATABASE_USER = '{{cookiecutter.db_user}}'
+
+
+DATABASES = {
+    'default': {
+        'ENGINE': DATABASE_ENGINE,
+        'NAME': DATABASE_NAME,
+        'USER': DATABASE_USER,
+        'PASSWORD': DATABASE_PASSWORD,
+        'HOST': DATABASE_HOST,
+        'PORT': DATABASE_PORT
+    }
+}
 
 # DATABASE_NAME = rds.get('engine') if rds else env.str('POSTGRES_NAME', 'postgres')
 # DATABASE_HOST = rds.get('host') if rds else env.str('POSTGRES_HOST', 'localhost')
