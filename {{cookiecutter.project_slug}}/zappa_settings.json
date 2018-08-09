@@ -11,7 +11,7 @@
     },
     {% if cookiecutter.use_vpc == 'y' %}
     "vpc_config": {
-      "SubnetIds": [ "{{cookiecutter.subnet_1}}", "{{cookiecutter.subnet_2}}"],
+      "SubnetIds": [ "{{cookiecutter.private_subnet_alpha}}", "{{cookiecutter.private_subnet_beta}}"],
       "SecurityGroupIds": ["{{cookiecutter.security_group_id}}"]
     }{% endif %}
   },
@@ -29,7 +29,7 @@
     "role_name": "{{cookiecutter.project_slug}}-production-ZappaExecutionRole", // Name of your Zappa execution role. Optional, default: <project_name>-<env>-ZappaExecutionRole.
     {% if cookiecutter.use_vpc == 'y' %}
     "vpc_config": {
-      "SubnetIds": ["{{cookiecutter.subnet_1}}", "{{cookiecutter.subnet_2}}"],
+      "SubnetIds": [ "{{cookiecutter.private_subnet_alpha}}", "{{cookiecutter.private_subnet_beta}}"],
       "SecurityGroupIds": ["{{cookiecutter.security_group_id}}"]
     }{% endif %}
   }

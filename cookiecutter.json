@@ -35,7 +35,7 @@
   "db_port": "",
   "db_user": "",
   "db_password": "",
-  "subnet_1": "",
-  "subnet_2": "",
+  "private_subnet_alpha": "",
+  "private_subnet_beta": "",
   "security_group_id": ""
 }
