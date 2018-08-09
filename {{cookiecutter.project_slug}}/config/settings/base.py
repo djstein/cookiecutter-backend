@@ -61,6 +61,7 @@ THIRD_PARTY_APPS = (
     'rest_auth.registration',
     'storages',
     'drfpasswordless',
+    'zappa_django_utils'
 )
 
 LOCAL_APPS = (

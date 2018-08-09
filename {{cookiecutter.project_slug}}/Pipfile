@@ -17,6 +17,7 @@ djangorestframework-jwt = "*"
 drfpasswordless = "*"
 "psycopg2" = "*"
 zappa = "*"
+zappa-django-utils = "*"
 whitenoise = "*"
 
 [dev-packages]
