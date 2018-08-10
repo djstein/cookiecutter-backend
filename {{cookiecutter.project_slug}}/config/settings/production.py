@@ -1,7 +1,6 @@
 from .base import *
 
 django_secret_key_response = client.get_secret_value(SecretId='DJANGO_SECRET_KEY')
-
 DJANGO_SECRET_KEY = django_secret_key_response.get('SecretString')
 
 SECRET_KEY = DJANGO_SECRET_KEY if DJANGO_SECRET_KEY else env.str('DJANGO_SECRET_KEY')
@@ -21,9 +20,8 @@ DEFAULT_FILE_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
 MEDIA_URL = f'https://s3.amazonaws.com/{AWS_STORAGE_BUCKET_NAME}/'
 
 # Database
-# rds_password_key_response = client.get_secret_value(SecretId='{{cookiecutter.rds_secret_key}}')
-rds_password_key_response = None
-RDS_DB_PASSWORD = rds_password_key_response.get('SecretString') if rds_password_key_response else '{{cookiecutter.db_password}}'
+rds_db_password_key_response = client.get_secret_value(SecretId='{{cookiecutter.rds_db_password_key}}')
+RDS_DB_PASSWORD = rds_db_password_key_response.get('SecretString') if rds_password_key_response else '{{cookiecutter.db_password}}'
 
 DATABASE_ENGINE = 'django.db.backends.postgresql_psycopg2'
 DATABASE_NAME = '{{cookiecutter.db_name}}'

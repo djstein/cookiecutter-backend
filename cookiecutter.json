@@ -29,7 +29,7 @@
   ],
   "use_vpc": "n",
   "stage": "production",
-  "rds_secret_key": "",
+  "rds_db_password_key": "",
   "db_name": "",
   "db_host": "",
   "db_port": "",
