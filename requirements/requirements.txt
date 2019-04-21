@@ -1,0 +1,6 @@
+cookiecutter
+flake8
+pytest
+pytest-runner
+pytest-cookies
+tox
